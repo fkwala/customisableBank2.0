@@ -1,3 +1,254 @@
 <%- include ('partials/header.ejs') %>
 
-<h1>Hello</h1>
+<script src="https://cdn.jsdelivr.net/npm/interactjs/dist/interact.min.js"></script>
+
+<div class="main">
+  <div class="drag-resize">Account summary</div>
+  <div class="drag-resize">Transfer funds between accounts</div>
+  <div class="drag-resize">iTrade</div>
+  <div class="drag-resize">Bill payment history</div>
+  <div class="drag-resize">Interac e-Transfer</div>
+  <div class="drag-resize">Account activity</div>
+  <div class="drag-resize">Send money internationally</div>
+  <div class="drag-resize">Direct deposits</div>
+  <div class="drag-resize">Pay bills</div>
+
+  <!-- <div style="margin-left: auto; 
+  margin-right: 0;">Edit mode is: 
+    <label class="switch">
+      <input type="checkbox">
+      <span class="slider round"></span>
+    </label>
+  </div> -->
+    
+  <div class="dropzone"></div>
+
+</div>
+
+<style>
+
+.dropzone {
+  border: dashed 4px transparent;
+  border-radius: 4px;
+  margin: 10px auto 40px;
+  padding: 400px;
+  width: 100%;
+  transition: background-color 0.3s;
+  overflow-x: hidden;
+}
+
+.drop-active {
+  border-color: #aaa;
+}
+
+.drop-target {
+  background-color: rgb(225, 175, 175);
+  border-color: #fff;
+  border-style: solid;
+}
+
+.drag-resize {
+  display: inline-block;
+  min-width: 40px;
+  padding: 2em 0.5em;
+  margin: 1rem 0 0 1rem;
+
+  color: rgb(53, 53, 53);
+  background-color: rgb(220, 220, 220);
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+
+  touch-action: none;
+  transform: translate(0px, 0px);
+  box-sizing: border-box;
+}
+
+.drag-drop.can-drop {
+    color: rgb(53, 53, 53);
+    background-color: rgb(220, 220, 220);
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+.switch {
+  position: relative;
+  display: inline-block;
+  width: 60px;
+  height: 34px;
+}
+
+.switch input { 
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #ccc;
+  -webkit-transition: .4s;
+  transition: .4s;
+}
+
+.slider:before {
+  position: absolute;
+  content: "";
+  height: 26px;
+  width: 26px;
+  left: 4px;
+  bottom: 4px;
+  background-color: white;
+  -webkit-transition: .4s;
+  transition: .4s;
+}
+
+input:checked + .slider {
+  background-color: #f04c4c;
+}
+
+input:focus + .slider {
+  box-shadow: 0 0 1px #f04c4c;
+}
+
+input:checked + .slider:before {
+  -webkit-transform: translateX(26px);
+  -ms-transform: translateX(26px);
+  transform: translateX(26px);
+}
+
+/* Rounded sliders */
+.slider.round {
+  border-radius: 34px;
+}
+
+.slider.round:before {
+  border-radius: 50%;
+}
+</style>
+
+<script>
+// ------------------ interact.js drag and drop start ------------------------
+// enable draggables to be dropped into this
+interact('.dropzone').dropzone({
+
+  // Require a 75% element overlap for a drop to be possible
+  overlap: 0.75,
+
+  // listen for drop related events:
+
+  ondropactivate: function (event) {
+    // add active dropzone feedback
+    event.target.classList.add('drop-active')
+  },
+  ondragenter: function (event) {
+    var draggableElement = event.relatedTarget
+    var dropzoneElement = event.target
+
+    // feedback the possibility of a drop
+    dropzoneElement.classList.add('drop-target')
+    draggableElement.classList.add('can-drop')
+  },
+  ondragleave: function (event) {
+    // remove the drop feedback style
+    event.target.classList.remove('drop-target')
+    event.relatedTarget.classList.remove('can-drop')
+  },
+  ondrop: function (event) {
+    // event.relatedTarget.textContent = 'Dropped'
+  },
+  ondropdeactivate: function (event) {
+    // remove active dropzone feedback
+    event.target.classList.remove('drop-active')
+    event.target.classList.remove('drop-target')
+  }
+})
+
+interact('.drag-resize')
+  .draggable({
+    inertia: true,
+    modifiers: [
+      interact.modifiers.restrictRect({
+        restriction: 'parent',
+        endOnly: true
+      })
+    ],
+    autoScroll: true,
+    // dragMoveListener from the dragging demo above
+    listeners: { move: dragMoveListener }
+  })
+
+function dragMoveListener (event) {
+  var target = event.target
+  // keep the dragged position in the data-x/data-y attributes
+  var x = (parseFloat(target.getAttribute('data-x')) || 0) + event.dx
+  var y = (parseFloat(target.getAttribute('data-y')) || 0) + event.dy
+
+  // translate the element
+  target.style.transform = 'translate(' + x + 'px, ' + y + 'px)'
+
+  // update the posiion attributes
+  target.setAttribute('data-x', x)
+  target.setAttribute('data-y', y)
+}
+
+// this function is used later in the resizing and gesture demos
+window.dragMoveListener = dragMoveListener
+// ------------------ interact.js drag and drop end ------------------------
+
+
+// ------------------ interact.js resizing start ------------------------
+interact('.drag-resize')
+  .resizable({
+    // resize from all edges and corners
+    edges: { left: true, right: true, bottom: true, top: true },
+
+    listeners: {
+      move (event) {
+        var target = event.target
+        var x = (parseFloat(target.getAttribute('data-x')) || 0)
+        var y = (parseFloat(target.getAttribute('data-y')) || 0)
+
+        // update the element's style
+        target.style.width = event.rect.width + 'px'
+        target.style.height = event.rect.height + 'px'
+
+        // translate when resizing from top or left edges
+        x += event.deltaRect.left
+        y += event.deltaRect.top
+
+        target.style.transform = 'translate(' + x + 'px,' + y + 'px)'
+
+        target.setAttribute('data-x', x)
+        target.setAttribute('data-y', y)
+      }
+    },
+    modifiers: [
+      // keep the edges inside the parent
+      interact.modifiers.restrictEdges({
+        outer: 'parent'
+      }),
+
+      // minimum size
+      interact.modifiers.restrictSize({
+        min: { width: 100, height: 50 }
+      })
+    ],
+
+    inertia: true
+  })
+  .draggable({
+    listeners: { move: window.dragMoveListener },
+    inertia: true,
+    modifiers: [
+      interact.modifiers.restrictRect({
+        restriction: 'parent',
+        endOnly: true
+      })
+    ]
+  })
+// ------------------  interact.js resizing end ------------------------
+
+</script>

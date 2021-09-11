@@ -34,7 +34,7 @@
 
 .header {
 
-    padding: 20px;
+    padding: 50px;
 
     text-align: center;
 
@@ -47,15 +47,15 @@
 }
 
 .button-round{
-
+    float: right;
+    position: relative;
+    top: -25px;
     background-color: rgb(213, 63, 63);
     color:rgb(255, 253, 253);
-    text-align:center;
     border-radius: 8px;
     border: none;
     padding: 15px;
     font-size:16px;
-
 }
 
 
@@ -69,83 +69,19 @@ body {
 }
 
 
-
-/* Hidden Side Nav Bar Citation: https://www.w3schools.com/howto/tryit.asp?filename=tryhow_js_sidenav */
-
-
-
-.sidenav {
-
-    height: 100%;
-
-    width: 0;
-
-    position: fixed;
-
-    z-index: 1;
-
-    top: 0;
-
-    left: 0;
-
+.optionsPane {
+    width: 200px;
+    height: 400px;
+    float: left;
     background-color: rgb(255, 255, 255);
-
-    overflow-x: hidden;
-
-    transition: 0.5s;
-
-    padding-top: 40px;
-
-    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-
+    border-collapse: collapse;
 }
 
-
-
-.sidenav a, .dropdown-btn, #logout-btn {
-
-    padding: 6px 8px 6px 16px;
-
-    text-decoration: none;
-
-    font-size: 20px;
-
-    color: #818181;
-
-    display: block;
-
-    border: none;
-
-    background: none;
-
-    cursor: pointer;
-
-    outline: none; 
-
-}
-
-
-
-.sidenav a:hover, .dropdown-btn:hover {
-
-    color: #f1f1f1;
-
-}
-
-
-
-.sidenav .closebtn {
-
-    position: absolute;
-
-    top: 0;
-
-    right: 15px;
-
-    font-size: 36px;
-
-    margin-left: 50px;
-
+.mainPane {
+    height: 425px;
+    background-color: rgb(128, 84, 84);
+    float: right;
+    border-collapse: collapse;
 }
 
 
@@ -177,7 +113,7 @@ body {
 
 <div class="header">
 
-    <div style="float:left">
+    <div style="float:left;position:relative;top:-25px">
 
         <h2><b>Scotia</b> Bud®</h2>
 
@@ -190,50 +126,8 @@ body {
 </div>
 
 
-<span style="font-size:25px;cursor:pointer;" onclick="openNav()">&#9776;</span>
-
-
-<div class="sidenav" id="mySidenav">
-
-<h1> graphs </h1>
-
-</div>
-
-
 
 <script>
-
-/* Loop through all dropdown buttons to toggle between hiding and showing its dropdown content - This allows the user to have multiple dropdowns without any conflict */
-
-var dropdown = document.getElementsByClassName("dropdown-btn");
-
-var i;
-
-
-
-for (i = 0; i < dropdown.length; i++) {
-
-    dropdown[i].addEventListener("click", function() {
-
-    this.classList.toggle("active");
-
-    var dropdownContent = this.nextElementSibling;
-
-    if (dropdownContent.style.display === "block") {
-
-    dropdownContent.style.display = "none";
-
-    } else {
-
-        dropdownContent.style.display = "block";
-
-    }
-
-    });
-
-}
-
-
 
 // To open and close side navbar
 
