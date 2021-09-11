@@ -1,0 +1,254 @@
+<!doctype html>
+
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+<!-- Latest compiled and minified CSS -->
+
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+<link href='https://fonts.googleapis.com/css?family=Mulish' rel='stylesheet'>
+
+
+<!-- jQuery library -->
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+
+
+<!-- Latest compiled JavaScript -->
+
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+
+<title>Scotia Bud®</title>
+
+</head>
+
+<style>
+
+.header {
+
+    padding: 20px;
+
+    text-align: center;
+
+    background: rgb(255, 253, 253);
+
+    color: rgb(213, 63, 63);
+
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+
+}
+
+.button-round{
+
+    background-color: rgb(213, 63, 63);
+    color:rgb(255, 253, 253);
+    text-align:center;
+    border-radius: 8px;
+    border: none;
+    padding: 15px;
+    font-size:16px;
+
+}
+
+
+
+body {
+
+    font-family: Mulish;
+
+    background-color:#f1f1f1de;
+
+}
+
+
+
+/* Hidden Side Nav Bar Citation: https://www.w3schools.com/howto/tryit.asp?filename=tryhow_js_sidenav */
+
+
+
+.sidenav {
+
+    height: 100%;
+
+    width: 0;
+
+    position: fixed;
+
+    z-index: 1;
+
+    top: 0;
+
+    left: 0;
+
+    background-color: rgb(255, 255, 255);
+
+    overflow-x: hidden;
+
+    transition: 0.5s;
+
+    padding-top: 40px;
+
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+
+}
+
+
+
+.sidenav a, .dropdown-btn, #logout-btn {
+
+    padding: 6px 8px 6px 16px;
+
+    text-decoration: none;
+
+    font-size: 20px;
+
+    color: #818181;
+
+    display: block;
+
+    border: none;
+
+    background: none;
+
+    cursor: pointer;
+
+    outline: none; 
+
+}
+
+
+
+.sidenav a:hover, .dropdown-btn:hover {
+
+    color: #f1f1f1;
+
+}
+
+
+
+.sidenav .closebtn {
+
+    position: absolute;
+
+    top: 0;
+
+    right: 15px;
+
+    font-size: 36px;
+
+    margin-left: 50px;
+
+}
+
+
+
+/* Main content */
+
+.main {
+
+    padding: 0px 10px;
+
+}
+
+
+@media screen and (max-height: 450px) {
+
+    .sidenav {padding-top: 15px;}
+
+    .sidenav a {font-size: 18px;}
+
+}
+
+</style>
+
+</head>
+
+<body>
+
+
+
+<div class="header">
+
+    <div style="float:left">
+
+        <h2><b>Scotia</b> Bud®</h2>
+
+    </div>
+
+    <div style="right:0">
+        <button class="button button-round">Sign Out</button>
+    </div>
+
+</div>
+
+
+<span style="font-size:25px;cursor:pointer;" onclick="openNav()">&#9776;</span>
+
+
+<div class="sidenav" id="mySidenav">
+
+<h1> graphs </h1>
+
+</div>
+
+
+
+<script>
+
+/* Loop through all dropdown buttons to toggle between hiding and showing its dropdown content - This allows the user to have multiple dropdowns without any conflict */
+
+var dropdown = document.getElementsByClassName("dropdown-btn");
+
+var i;
+
+
+
+for (i = 0; i < dropdown.length; i++) {
+
+    dropdown[i].addEventListener("click", function() {
+
+    this.classList.toggle("active");
+
+    var dropdownContent = this.nextElementSibling;
+
+    if (dropdownContent.style.display === "block") {
+
+    dropdownContent.style.display = "none";
+
+    } else {
+
+        dropdownContent.style.display = "block";
+
+    }
+
+    });
+
+}
+
+
+
+// To open and close side navbar
+
+function openNav() {
+
+    document.getElementById("mySidenav").style.width = "250px";
+
+}
+
+
+
+function closeNav() {
+
+    document.getElementById("mySidenav").style.width = "0";
+
+}
+
+</script>
